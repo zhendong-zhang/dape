@@ -87,7 +87,7 @@
      ensure (lambda (config)
               (unless (plist-get config 'port)
                 (user-error "Missing `port' property")))
-     host "localhost"
+     host "127.0.0.1"
      :request "attach")
     (launch
      modes nil
@@ -265,7 +265,7 @@
            modes (js-mode js-ts-mode typescript-mode typescript-ts-mode)
            ,@js-debug
            :type "pwa-chrome"
-           :url "http://localhost:3000"
+           :url "http://127.0.0.1:3000"
            :webRoot dape-cwd)))
     ,@(let ((lldb-common
              `(modes (c-mode c-ts-mode c++-mode c++-ts-mode rust-mode rust-ts-mode rustic-mode)
@@ -973,7 +973,7 @@ If `port' is not `:autoport' return config as is."
     (let ((port-probe
            (make-network-process :name "dape-port-probe-dummy"
                                  :server t
-                                 :host "localhost"
+                                 :host "127.0.0.1"
                                  :service 0)))
       (plist-put config
                  'port
@@ -2083,7 +2083,7 @@ symbol `dape-connection'."
         (when (file-remote-p default-directory)
           (sleep-for 0.300)))
       ;; connect to server
-      (let ((host (or (plist-get config 'host) "localhost")))
+      (let ((host (or (plist-get config 'host) "127.0.0.1")))
         (while (and (not process)
                     (> retries 0))
           (ignore-errors
